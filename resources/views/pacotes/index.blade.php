@@ -15,7 +15,14 @@
             <td>{{ $value->id }}</td>
             <td>{{ $value->titulo }}</td>
             <td>{{ $value->preco }}</td>
-            <td><a href="{{ route('pacotes.show', $value->id) }}">visualizar</a></td>
+            <td>
+                <a href="{{ route('pacotes.show', $value->id) }}">visualizar</a>
+                <form action="{{ route('pacotes.destroy') }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit">deletar</button>
+                </form>
+            </td>
         </tr>
     @endforeach
     

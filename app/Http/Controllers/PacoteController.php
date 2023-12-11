@@ -61,7 +61,13 @@ class PacoteController extends Controller
      */
     public function edit(Pacote $pacote)
     {
-        //
+        $pacote = $pacote->find($id);
+
+        if(!$pacote) {
+            return back();
+        }
+        
+        return view('pacotes.edit', compact('pacote'));
     }
 
     /**
@@ -69,7 +75,15 @@ class PacoteController extends Controller
      */
     public function update(Request $request, Pacote $pacote)
     {
-        //
+        $pacote = $pacote->find($id);
+
+        if(!$pacote) {
+            return back();
+        }
+
+        $pacote->update(...$request->all());
+        
+        return view('pacotes.show', compact('pacote'));
     }
 
     /**
@@ -77,6 +91,14 @@ class PacoteController extends Controller
      */
     public function destroy(Pacote $pacote)
     {
-        //
+        $pacote = $pacote->find($id);
+
+        if(!$pacote) {
+            return back();
+        }
+
+        $pacote->delete();
+        
+        return redirect()->route('pacotes.index');
     }
 }
