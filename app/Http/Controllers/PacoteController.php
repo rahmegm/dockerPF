@@ -59,9 +59,9 @@ class PacoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pacote $pacote)
+    public function edit(string $id, Pacote $pacote)
     {
-        $pacote = $pacote->find($id);
+        $pacote = $pacote->find($id); 
 
         if(!$pacote) {
             return back();
@@ -73,32 +73,22 @@ class PacoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pacote $pacote)
+    public function update(Request $request,string $id)
     {
-        $pacote = $pacote->find($id);
+        //$pacote = $this->pacote->where('id',$id)->update()
 
-        if(!$pacote) {
-            return back();
-        }
+        var_dump(value:$request->all());
 
-        $pacote->update(...$request->all());
-        
-        return view('pacotes.show', compact('pacote'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pacote $pacote)
+    public function delete(string $id): bool|null
     {
-        $pacote = $pacote->find($id);
-
-        if(!$pacote) {
-            return back();
+        if (!$this->findOneById($id)) {
+            return null;
         }
-
-        $pacote->delete();
-        
-        return redirect()->route('pacotes.index');
+        return $this->recommendation->destroy($id);
     }
 }

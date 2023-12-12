@@ -1,5 +1,5 @@
 <h1>
-    Teste
+    Pacotes:
 </h1>
 
 <a href="{{ route('pacotes.create') }}">Criar pacote</a>
@@ -16,11 +16,9 @@
             <td>{{ $value->titulo }}</td>
             <td>{{ $value->preco }}</td>
             <td>
-                <a href="{{ route('pacotes.show', $value->id) }}">visualizar</a>
-                <form action="{{ route('pacotes.destroy') }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit">deletar</button>
+                <a href="{{ route('pacotes.show', $value->id) }}">Visualizar</a>
+                <a href="{{ route('pacotes.edit', $value->id) }}">Editar</a>
+                <a href="">Deletar</a>
                 </form>
             </td>
         </tr>
