@@ -1,7 +1,14 @@
-<h1>Criar pacote</h1>
+@extends('master')
 
-<form action="{{ route('pacotes.store') }}" method="post">
+@section('content')
+
+<h2>Editando</h2>
+
+
+
+<form action="{{ route('pacotes.update',$pacote->id) }}" method="put">
     @csrf()
+    <input type="hidden" name="_method" value="PUT">
     <input type="text" name="titulo" placeholder="titulo" value="{{ $pacote->titulo }}">
     <input type="number" name="preco" placeholder="preco" value="{{ $pacote->preco }}">
     <textarea name="comidas" id="" cols="30" rows="10" placeholder="comidas" value="{{ $pacote->comidas }}"></textarea>
@@ -11,3 +18,4 @@
     <input type="text" name="foto3" placeholder="foto 3" value="{{ $pacote->foto3 }}">
     <button type="submit">Enviar</button>
 </form>
+@endsection

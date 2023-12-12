@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\PacoteController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -31,8 +32,11 @@ Route::get('/pacotes/{id}/editar', [PacoteController::class, 'edit'])->name('pac
 Route::put('/pacotes/{id}', [PacoteController::class, 'update'])->name('pacotes.update');
 Route::delete('/pacotes/{id}', [PacoteController::class, 'destroy'])->name('pacotes.destroy');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+    Route::get(uri:'/users',action:[UserController::class, 'index'])->name(name: 'users.index');
+    Route::get(uri:'/users/create',action:[UserController::class, 'create'])->name(name: 'users.create');
+    Route::post(uri:'/users',action:[UserController::class, 'store'])->name(name: 'users.store');
+    Route::get(uri:'/users/{user}',action:[UserController::class, 'show'])->name(name: 'users.show');
+    Route::get(uri:'/users/{user}/{edit}',action:[UserController::class, 'edit'])->name(name: 'users.edit');
+    Route::post(uri:'/users/{user}',action:[UserController::class, 'update'])->name(name: 'users.update');
+    Route::delete(uri:'/users/{user}',action:[UserController::class, 'destroy'])->name(name: 'users.destroy');
+    
