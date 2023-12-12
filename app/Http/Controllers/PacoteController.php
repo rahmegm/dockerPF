@@ -89,16 +89,11 @@ class PacoteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pacote $pacote)
+    public function delete(string $id): bool|null
     {
-        $pacote = $pacote->find($id);
-
-        if(!$pacote) {
-            return back();
+        if (!$this->findOneById($id)) {
+            return null;
         }
-
-        $pacote->delete();
-        
-        return redirect()->route('pacotes.index');
+        return $this->recommendation->destroy($id);
     }
 }
